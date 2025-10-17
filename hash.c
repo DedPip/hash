@@ -31,6 +31,17 @@ void insert_person(const char *name, const char *info) {
     strcpy(hashTable[hashIndex].info, info);
 }
 
+void search_person(const char *name) {
+    unsigned int hashIndex = hash(name);
+    if (strcmp(hashTable[hashIndex].name, name) == 0)
+    {
+        printf("Person found: %s, %s\n", name, hashTable[hashIndex].info);
+    }
+    else {
+        printf("Person not found\n");
+    }
+}
+
 int main(void) {
 
 }
