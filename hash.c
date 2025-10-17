@@ -34,14 +34,35 @@ int main(void) {
     printf("\n");
     while (1) {
         printf("Enter a name to search: ");
-        scanf("%49s", name);
+        if (!fgets(name, sizeof(name), stdin)) {
+            printf("Input Error\n");
+            break;
+        }
+
+        int nameStrLen = strlen(name);
+        if (nameStrLen > 0 && name[nameStrLen - 1] != '\n') {
+            printf("Name cannot be bigger than 49 characters\n");
+            int bufferTrashCan = 0;
+            while ((bufferTrashCan = getchar()) != '\n' && bufferTrashCan != EOF);
+            continue;
+        }
+
+        name[strcspn(name, "\n")] = '\0';
+
+        if (name[0] == '\0') {
+            printf("Input cannot be empty\n");
+            continue;
+        }
+
         if (strcmp(name, "end") == 0) {
             printf("Program stopped\n");
-            return 0;
+            break;
         }
+
         search_person(name);
         printf("\n");
     }
+    return 0;
 }
 
 unsigned int hash(const char *str) {
