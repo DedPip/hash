@@ -34,7 +34,7 @@ int main(void) {
     printf("\n");
     while (1) {
         printf("Enter a name to search: ");
-        scanf("%s", name);
+        scanf("%49s", name);
         if (strcmp(name, "end") == 0) {
             printf("Program stopped\n");
             return 0;
@@ -50,7 +50,7 @@ unsigned int hash(const char *str) {
         return 0;
     }
     unsigned long hashNumber = DJB2_HASH_NUMBER;
-    unsigned int character = 0; 
+    int character = 0; 
 
     while((character = *str++)) {
         hashNumber = ((hashNumber << 5) + hashNumber) + character;
