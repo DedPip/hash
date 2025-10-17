@@ -9,6 +9,8 @@ typedef struct {
     char info[MAX_INFO_SIZE];
 } Person;
 
+Person hashTable[MAX_TABLE_SIZE];
+
 unsigned int hash(const char *str) {
     if (str == NULL) {
         printf("name is NULL\n");
