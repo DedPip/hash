@@ -4,6 +4,7 @@
 #define MAX_NAME_SIZE 50
 #define MAX_INFO_SIZE 100
 #define MAX_TABLE_SIZE 10
+#define DJB2_HASH_NUMBER 5381
 
 typedef struct {
     char name[MAX_NAME_SIZE];
@@ -48,12 +49,13 @@ unsigned int hash(const char *str) {
         printf("name is NULL\n");
         return 0;
     }
-    unsigned int sum = 0;
-    while (*str) {
-        sum += *str;
-        str++;
+    unsigned long hashNumber = DJB2_HASH_NUMBER;
+    unsigned int character = 0; 
+
+    while((character = *str++)) {
+        hashNumber = ((hashNumber << 5) + hashNumber) + character;
     }
-    return sum % MAX_TABLE_SIZE;
+    return hashNumber % MAX_TABLE_SIZE;
 }
 
 void insert_person(const char *name, const char *info) {
