@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_NAME_SIZE 50
 #define MAX_INFO_SIZE 100
@@ -22,6 +23,12 @@ unsigned int hash(const char *str) {
         str++;
     }
     return sum % MAX_TABLE_SIZE;
+}
+
+void insert_person(const char *name, const char *info) {
+    unsigned int hashIndex = hash(name);
+    strcpy(hashTable[hashIndex].name, name);
+    strcpy(hashTable[hashIndex].info, info);
 }
 
 int main(void) {
