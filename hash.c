@@ -43,5 +43,23 @@ void search_person(const char *name) {
 }
 
 int main(void) {
+    while (1) {
+        for (int i = 0; i < MAX_TABLE_SIZE; i++) {
+            memset(hashTable[i].name, 0, MAX_NAME_SIZE);
+            memset(hashTable[i].info, 0, MAX_INFO_SIZE);
+        }
 
+        insert_person("Ali", "Age 20, City: Langarud");
+        insert_person("Reza", "Age: 18 City: Lahijan");
+
+        char name[MAX_NAME_SIZE];
+        printf("Welcome to hash, type 'end' to stop program.\n");
+        printf("Enter a name to search: ");
+        scanf("%s", name);
+        if (strcmp(name, "end") == 0) {
+            printf("Program stopped\n");
+            return 0;
+        }
+        search_person(name);
+    }
 }
