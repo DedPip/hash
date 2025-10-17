@@ -25,6 +25,7 @@ int main(void) {
 
     insert_person("Ali", "Age 20, City: Langarud");
     insert_person("Reza", "Age: 18 City: Lahijan");
+    insert_person("liA", "Age 20, City: Langarud");
 
     char name[MAX_NAME_SIZE];
 
@@ -45,7 +46,7 @@ int main(void) {
 unsigned int hash(const char *str) {
     if (str == NULL) {
         printf("name is NULL\n");
-        return 1;
+        return 0;
     }
     unsigned int sum = 0;
     while (*str) {
@@ -57,6 +58,10 @@ unsigned int hash(const char *str) {
 
 void insert_person(const char *name, const char *info) {
     unsigned int hashIndex = hash(name);
+    if (hashTable[hashIndex].name[0] != '\0') {
+        printf("Insertion failed! Collision detected when inserting '%s' at index %u of %i it's occupied by '%s'\n", name, hashIndex, MAX_TABLE_SIZE, hashTable[hashIndex].name);
+        return;
+    }
     strcpy(hashTable[hashIndex].name, name);
     strcpy(hashTable[hashIndex].info, info);
 }
