@@ -59,6 +59,15 @@ int main(void) {
         search_person(name);
         printf("\n");
     }
+    for (int i = 0; i < MAX_TABLE_SIZE; i++) {
+        Person *current = hashTable[i];
+        while(current != NULL) {
+            Person *temp = current;
+            current = current->next;
+            free(temp);
+        }
+        hashTable[i] = NULL;
+    }
     return 0;
 }
 
