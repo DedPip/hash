@@ -21,9 +21,9 @@ void search_person(const char *name);
 
 int main(void) {
 
+    insert_person("Ali", "Age 23, City: Rasht");
     insert_person("Ali", "Age 20, City: Langarud");
     insert_person("Reza", "Age: 18 City: Lahijan");
-    insert_person("liA", "Age 20, City: Langarud");
 
     char name[MAX_NAME_SIZE];
 
@@ -105,9 +105,9 @@ void search_person(const char *name) {
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
             printf("Found person: name: %s info: %s\n", name, current->info);
-            return;
         } 
         current = current->next;
     }
+    return;
     printf("Person not found\n");
 }
