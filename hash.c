@@ -183,6 +183,11 @@ void search_person(const char *name) {
     Person *current = hashTable[hashIndext];
     int personCount = 0;
     char *notFound = "Person not found!\n";
+    
+    if (current == NULL) {
+        printf("%s", notFound);
+        return;
+    }
 
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
@@ -196,7 +201,6 @@ void search_person(const char *name) {
             return;
         }
     }
-    printf("%s", notFound);
 
 
 }
