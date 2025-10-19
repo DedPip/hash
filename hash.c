@@ -179,28 +179,19 @@ void insert_person(const char *name, const char *info) {
 }
 
 void search_person(const char *name) {
-    unsigned int hashIndext = hash(name);
-    Person *current = hashTable[hashIndext];
+    unsigned int hashIndex = hash(name);
+    Person *current = hashTable[hashIndex];
     int personCount = 0;
-    char *notFound = "Person not found!\n";
-    
-    if (current == NULL) {
-        printf("%s", notFound);
-        return;
-    }
 
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
-            printf("Found person: name: %s info: %s\n", name, current->info);
-            current = current->next;
+            printf("Found person: name: %s info: %s\n", current->name, current->info);
             personCount++;
-            continue;
-        } 
-        if (personCount == 0) {
-            printf("%s", notFound);
-            return;
         }
+        current = current->next;
     }
 
-
+    if (personCount == 0) {
+        printf("Person not found!\n");
+    }
 }
