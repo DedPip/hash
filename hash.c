@@ -23,6 +23,7 @@ int main(void) {
 
     insert_person("Reza Gholami", "Age: 18 City: Lahijan");
     insert_person("Sara Ahmadi", "Age: 25 City: Tehran");
+    insert_person("Sara Ahmadi", "Age: 27 City: Shiraz");
     insert_person("Ali Hosseini", "Age: 30 City: Mashhad");
     insert_person("Mina Rahimi", "Age: 22 City: Shiraz");
     insert_person("Mohammad Karimi", "Age: 27 City: Tabriz");
@@ -180,16 +181,22 @@ void insert_person(const char *name, const char *info) {
 void search_person(const char *name) {
     unsigned int hashIndext = hash(name);
     Person *current = hashTable[hashIndext];
-
-    if (current == NULL) {
-        printf("Person not found\n");
-        return;
-    }
+    int personCount = 0;
+    char *notFound = "Person not found!\n";
 
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
             printf("Found person: name: %s info: %s\n", name, current->info);
+            current = current->next;
+            personCount++;
+            continue;
         } 
-        current = current->next;
+        if (personCount == 0) {
+            printf("%s", notFound);
+            return;
+        }
     }
+    printf("%s", notFound);
+
+
 }
